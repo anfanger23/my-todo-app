@@ -1,12 +1,33 @@
-# React + Vite
+# 📝 Smart To-Do App – Context API vs Redux Toolkit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dette er en prototype to-do applikation udviklet som del af min synopsisopgave i React. Formålet er at undersøge, hvornår **Redux Toolkit** er en mere hensigtsmæssig løsning end **Context API** til global state management i større React-applikationer.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💡 Funktionalitet
 
-## Expanding the ESLint configuration
+- Tilføj både små og store opgaver
+- Store opgaver kan planlægges over flere dage med deadline og daglig tidsgrænse
+- Tags og filtrering efter type, tag og "kun dagens opgaver"
+- Dynamisk statusoversigt
+- Toggle mellem Context og Redux version direkte i appen
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⚙️ Teknologi
+
+- React 18 + Vite
+- Context API
+- Redux Toolkit
+- JetBrains Mono som UI-skrifttype
+- date-fns til datoformatering og sammenligning
+
+---
+
+## 🖥️ Sådan bruges den
+
+### Start projektet lokalt
+
+```bash
+npm install
+npm run dev
