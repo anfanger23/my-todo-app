@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
+import { selectTodos } from '../../redux/todoSlice';
 
 function StatsOverviewRedux() {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector(selectTodos);
 
   const doneCount = todos.filter((todo) => todo.isDone).length;
   const remainingTodos = todos.filter((todo) => !todo.isDone);

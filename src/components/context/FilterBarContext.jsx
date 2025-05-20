@@ -35,8 +35,8 @@ function FilterBar() {
         }}
       >
         <option value="">Alle typer</option>
-        <option value="hurtig">Hurtige</option>
-        <option value="stor">Store</option>
+        <option value="hurtig">Lille</option>
+        <option value="stor">Stor</option>
       </select>
 
       <input

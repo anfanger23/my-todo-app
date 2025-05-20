@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from '../../redux/todosSlice';
+import { setFilter } from '../../redux/todoSlice';
 
 function FilterBarRedux() {
   const dispatch = useDispatch();
@@ -36,8 +36,8 @@ function FilterBarRedux() {
         }}
       >
         <option value="">Alle typer</option>
-        <option value="hurtig">Hurtige</option>
-        <option value="stor">Store</option>
+        <option value="hurtig">Lille</option>
+        <option value="stor">Stor</option>
       </select>
 
       <input
