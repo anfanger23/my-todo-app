@@ -1,0 +1,118 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+.app-container {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+form, .todo-item, .filter-bar, .stats-box {
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+
+input, button {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: auto;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #777777;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1e40af;
+}
+
+.todo-item h3 {
+  margin-bottom: 0.5rem;
+}
+
+.todo-item.done {
+  background-color: #e0fce0;
+  text-decoration: line-through;
+  color: #2e7d32;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+.stats-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select {
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: auto;
+  ;
+}
+
