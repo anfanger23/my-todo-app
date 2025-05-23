@@ -4,13 +4,28 @@ import {
   deleteTodo,
   selectTodos,
   selectFilter,
+  logTime,
 } from '../../redux/todoSlice';
 import { isToday, parseISO } from 'date-fns';
+import { useState } from 'react';
 
 function TodoListRedux() {
   const dispatch = useDispatch();
   const todos = useSelector(selectTodos);
   const filter = useSelector(selectFilter);
+  const [minutesWorkedMap, setMinutesWorkedMap] = useState({});
+
+  const handleMinutesChange = (id, value) => {
+    setMinutesWorkedMap((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleLogTime = (id) => {
+    const minutes = Number(minutesWorkedMap[id]);
+    if (!isNaN(minutes) && minutes > 0) {
+      dispatch(logTime({ id, minutes }));
+      setMinutesWorkedMap((prev) => ({ ...prev, [id]: '' }));
+    }
+  };
 
   const filteredTodos = todos.filter((todo) => {
     if (filter.type && todo.type !== filter.type) return false;
@@ -34,10 +49,29 @@ function TodoListRedux() {
             {todo.tags.length > 0 && <p>🏷 {todo.tags.join(', ')}</p>}
           </div>
 
+          {!todo.isDone && todo.type === 'stor' && (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginTop: '0.5rem' }}>
+              <input
+                type="number"
+                min="1"
+                placeholder="Tid brugt (min)"
+                value={minutesWorkedMap[todo.id] || ''}
+                onChange={(e) => handleMinutesChange(todo.id, e.target.value)}
+                style={{ width: '120px', padding: '0.4rem' }}
+              />
+              <button onClick={() => handleLogTime(todo.id)}>⏳ Registrér</button>
+            </div>
+          )}
+
+          {!todo.isDone && todo.type === 'hurtig' && (
+            <div className="todo-actions">
+              <button onClick={() => dispatch(toggleDone(todo.id))}>✅ Markér som færdig</button>
+            </div>
+          )}
+
+          {todo.isDone && <p style={{ fontStyle: 'italic' }}>✅ Opgaven er færdig</p>}
+
           <div className="todo-actions">
-            <button onClick={() => dispatch(toggleDone(todo.id))}>
-              {todo.isDone ? '↩️' : '✅'}
-            </button>
             <button onClick={() => dispatch(deleteTodo(todo.id))}>❌</button>
           </div>
         </div>

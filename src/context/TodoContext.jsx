@@ -8,20 +8,17 @@ export const useTodos = () => useContext(TodoContext);
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
 
-  // 🆕 Tilføj filter state til filtrering i TodoList
   const [filter, setFilter] = useState({
-    type: '',              // 'hurtig' eller 'stor'
-    tag: '',               // fx 'Skole' eller 'Hjem'
-    showTodayOnly: false,  // checkbox
+    type: '',
+    tag: '',
+    showTodayOnly: false,
   });
 
-  // Tilføj ny opgave
   const addTodo = ({
     title,
     type,
     estimatedMinutes,
     deadline,
-    dailyLimit,
     tags = []
   }) => {
     const newTodo = {
@@ -30,7 +27,6 @@ export const TodoProvider = ({ children }) => {
       type,
       estimatedMinutes: type === 'stor' ? Number(estimatedMinutes) : Number(estimatedMinutes) || 15,
       deadline: type === 'stor' ? deadline : null,
-      dailyLimit: type === 'stor' ? Number(dailyLimit) : null,
       tags,
       plannedBlocks: [],
       isDone: false,
@@ -40,7 +36,6 @@ export const TodoProvider = ({ children }) => {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  // Skift status
   const toggleDone = (id) => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -49,9 +44,25 @@ export const TodoProvider = ({ children }) => {
     );
   };
 
-  // Slet opgave
   const deleteTodo = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  // 🆕 Log arbejdstid på stor opgave
+  const logTime = (id, minutes) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (todo.id === id && todo.type === 'stor' && !todo.isDone) {
+          const remaining = Math.max(todo.estimatedMinutes - minutes, 0);
+          return {
+            ...todo,
+            estimatedMinutes: remaining,
+            isDone: remaining === 0,
+          };
+        }
+        return todo;
+      })
+    );
   };
 
   return (
@@ -63,6 +74,7 @@ export const TodoProvider = ({ children }) => {
         deleteTodo,
         filter,
         setFilter,
+        logTime,
       }}
     >
       {children}

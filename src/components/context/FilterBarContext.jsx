@@ -31,7 +31,7 @@ function FilterBar() {
         style={{
           flex: '1 1 150px',
           padding: '0.6rem',
-          height: '40px',
+          height: '34px',
         }}
       >
         <option value="">Alle typer</option>

@@ -9,19 +9,17 @@ function TodoFormRedux() {
   const [type, setType] = useState('hurtig');
   const [estimatedMinutes, setEstimatedMinutes] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [dailyLimit, setDailyLimit] = useState('');
   const [tags, setTags] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addTodo({ title, type, estimatedMinutes, deadline, dailyLimit, tags }));
+    dispatch(addTodo({ title, type, estimatedMinutes, deadline, tags }));
 
     // Reset formular
     setTitle('');
     setEstimatedMinutes('');
     setDeadline('');
-    setDailyLimit('');
     setTags('');
     setType('hurtig');
   };
@@ -66,21 +64,12 @@ function TodoFormRedux() {
       />
 
       {type === 'stor' && (
-        <>
-          <input
-            type="date"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
-            style={{ flex: "1 1 180px", padding: "0.6rem" }}
-          />
-          <input
-            type="number"
-            placeholder="Daglig tidsgrænse (minutter)"
-            value={dailyLimit}
-            onChange={(e) => setDailyLimit(e.target.value)}
-            style={{ flex: "1 1 200px", padding: "0.6rem" }}
-          />
-        </>
+        <input
+          type="date"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          style={{ flex: "1 1 180px", padding: "0.6rem" }}
+        />
       )}
 
       <input

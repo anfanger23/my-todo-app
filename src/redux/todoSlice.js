@@ -17,7 +17,7 @@ const todosSlice = createSlice({
       reducer(state, action) {
         state.items.push(action.payload);
       },
-      prepare({ title, type, estimatedMinutes, deadline, dailyLimit, tags }) {
+      prepare({ title, type, estimatedMinutes, deadline, tags }) {
         return {
           payload: {
             id: nanoid(),
@@ -27,7 +27,6 @@ const todosSlice = createSlice({
               ? Number(estimatedMinutes)
               : Number(estimatedMinutes) || 15,
             deadline: type === 'stor' ? deadline : null,
-            dailyLimit: type === 'stor' ? Number(dailyLimit) : null,
             tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
             isDone: false,
             createdAt: new Date().toISOString().split('T')[0],
@@ -52,10 +51,22 @@ const todosSlice = createSlice({
         ...action.payload,
       };
     },
+
+    //reducer til logning af arbejdstid
+    logTime(state, action) {
+      const { id, minutes } = action.payload;
+      const todo = state.items.find(t => t.id === id);
+      if (todo && todo.type === 'stor' && !todo.isDone) {
+        todo.estimatedMinutes = Math.max(todo.estimatedMinutes - minutes, 0);
+        if (todo.estimatedMinutes === 0) {
+          todo.isDone = true;
+        }
+      }
+    },
   },
 });
 
-export const { addTodo, toggleDone, deleteTodo, setFilter } = todosSlice.actions;
+export const { addTodo, toggleDone, deleteTodo, setFilter, logTime } = todosSlice.actions;
 export default todosSlice.reducer;
 export const selectTodos = (state) => state.todos.items;
 export const selectFilter = (state) => state.todos.filter;
