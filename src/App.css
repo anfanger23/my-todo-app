@@ -37,7 +37,7 @@ form {
 input,
 select,
 button {
-  max-width: 400px;
+  max-width: 350px;
   padding: 0.6rem;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -46,6 +46,7 @@ button {
 }
 select {
   box-shadow: none;
+  max-width: 200px;
 }
 
 button {

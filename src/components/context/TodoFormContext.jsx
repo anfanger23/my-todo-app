@@ -51,18 +51,18 @@ function TodoForm() {
         style={{ flex: "1 1 150px", padding: "0.6rem" }}
       />
 
-      <select
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        style={{
-          flex: "1 1 150px",
-          padding: "0.6rem",
-          height: "34px",
-        }}
-      >
-        <option value="hurtig">Lille</option>
-        <option value="stor">Stor</option>
-      </select>
+  <select
+    value={type}
+    onChange={(e) => setType(e.target.value)}
+    style={{
+      flex: "1 1 150px",
+      padding: "0.6rem",
+      height: "34px", // så den matcher input
+    }}
+  >
+    <option value="hurtig">Lille</option>
+    <option value="stor">Stor</option>
+  </select>
 
       <input
         type="number"

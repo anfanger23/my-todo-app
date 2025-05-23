@@ -23,9 +23,7 @@ const todosSlice = createSlice({
             id: nanoid(),
             title,
             type,
-            estimatedMinutes: type === 'stor'
-              ? Number(estimatedMinutes)
-              : Number(estimatedMinutes) || 15,
+            estimatedMinutes: Number(estimatedMinutes) || 15,
             deadline: type === 'stor' ? deadline : null,
             tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
             isDone: false,
@@ -38,7 +36,9 @@ const todosSlice = createSlice({
 
     toggleDone(state, action) {
       const todo = state.items.find(t => t.id === action.payload);
-      if (todo) todo.isDone = !todo.isDone;
+      if (todo) {
+        todo.isDone = !todo.isDone;
+      }
     },
 
     deleteTodo(state, action) {
@@ -52,7 +52,6 @@ const todosSlice = createSlice({
       };
     },
 
-    //reducer til logning af arbejdstid
     logTime(state, action) {
       const { id, minutes } = action.payload;
       const todo = state.items.find(t => t.id === id);
