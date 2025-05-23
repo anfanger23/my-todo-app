@@ -2,107 +2,101 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/todoSlice';
 
+/**
+ * TodoFormRedux - Komponent til at tilføje nye opgaver via Redux
+ * Håndterer brugerinput og sender data til Redux store
+ */
 function TodoFormRedux() {
+  // Hent dispatch-funktionen fra Redux
   const dispatch = useDispatch();
+  
+  // State variabler til at gemme formulardata
+  const [title, setTitle] = useState(''); // Opgavens titel
+  const [type, setType] = useState('hurtig'); // Opgavetype: 'hurtig' eller 'stor'
+  const [estimatedMinutes, setEstimatedMinutes] = useState(''); // Estimeret tid i minutter
+  const [deadline, setDeadline] = useState(''); // Deadline dato (kun for store opgaver)
+  const [tags, setTags] = useState(''); // Kommaseparerede tags
 
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState('hurtig');
-  const [estimatedMinutes, setEstimatedMinutes] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const [dailyLimit, setDailyLimit] = useState('');
-  const [tags, setTags] = useState('');
-
+  /**
+   * Håndterer formular-indsendelse
+   * @param {Event} e - Formular-event objekt
+   */
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Forhindrer standard formular-opførsel
 
-    dispatch(addTodo({ title, type, estimatedMinutes, deadline, dailyLimit, tags }));
+    // Dispatcher action til Redux store med formulardata
+    dispatch(
+      addTodo({
+        title,
+        type,
+        estimatedMinutes,
+        deadline,
+        tags,
+      })
+    );
 
-    // Reset formular
+    // Nulstil alle formularfelter efter indsendelse
     setTitle('');
+    setType('hurtig');
     setEstimatedMinutes('');
     setDeadline('');
-    setDailyLimit('');
     setTags('');
-    setType('hurtig');
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        boxShadow: "none",
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: "0.8rem",
-      }}
-    >
-      <h2 style={{ width: "100%", marginBottom: "0.5rem" }}>Tilføj opgave</h2>
+    <>
+      <h2>Tilføj opgave</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Input felt til opgavetitel */}
+        <input
+          type="text"
+          placeholder="Titel"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
 
-      <input
-        type="text"
-        placeholder="Titel"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-        style={{ flex: "1 1 150px", padding: "0.6rem" }}
-      />
-
-      <select
+        {/* Dropdown til valg af opgavetype */}
+         <select
         value={type}
         onChange={(e) => setType(e.target.value)}
-        style={{ flex: "1 1 150px", padding: "0.6rem", height: "40px" }}
+        style={{ flex: "1 1 150px", padding: "0.6rem", height: "34px" }}
       >
         <option value="hurtig">Lille</option>
         <option value="stor">Stor</option>
       </select>
 
-      <input
-        type="number"
-        placeholder="Estimeret tid (minutter)"
-        value={estimatedMinutes}
-        onChange={(e) => setEstimatedMinutes(e.target.value)}
-        style={{ flex: "1 1 160px", padding: "0.6rem" }}
-      />
+        {/* Input til estimeret tid i minutter */}
+        <input
+          type="number"
+          placeholder="Estimeret tid (minutter)"
+          style={{ flex: "1 1 160px", padding: "0.6rem" }}
+          value={estimatedMinutes}
+          onChange={(e) => setEstimatedMinutes(e.target.value)}
+          required
+        />
 
-      {type === 'stor' && (
-        <>
+        {/* Betinget visning af deadline-felt (kun for store opgaver) */}
+        {type === 'stor' && (
           <input
             type="date"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
-            style={{ flex: "1 1 180px", padding: "0.6rem" }}
           />
-          <input
-            type="number"
-            placeholder="Daglig tidsgrænse (minutter)"
-            value={dailyLimit}
-            onChange={(e) => setDailyLimit(e.target.value)}
-            style={{ flex: "1 1 200px", padding: "0.6rem" }}
-          />
-        </>
-      )}
+        )}
 
-      <input
-        type="text"
-        placeholder="Tags (kommasepareret)"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-        style={{ flex: "1 1 250px", padding: "0.6rem" }}
-      />
+        {/* Input til tags (kommasepareret liste) */}
+        <input
+          type="text"
+          placeholder="Tags (kommasepareret)"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
+        />
 
-      <button
-        type="submit"
-        style={{
-          padding: "0.6rem 1rem",
-          height: "40px",
-          width: "auto",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Tilføj
-      </button>
-    </form>
+        {/* Knap til at indsende formularen */}
+        <button type="submit">Tilføj</button>
+      </form>
+    </>
   );
 }
 

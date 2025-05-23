@@ -60,7 +60,7 @@ function TodoForm() {
     style={{
       flex: "1 1 150px",
       padding: "0.6rem",
-      height: "40px", // så den matcher input
+      height: "34px", // så den matcher input
     }}
   >
     <option value="hurtig">Lille</option>

@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  color: #white;
+  color: #fff;
   margin: 0;
   padding: 0;
   font-family: 'JetBrains Mono', monospace;
@@ -37,7 +37,7 @@ form {
 input,
 select,
 button {
-  max-width: 400px;
+  max-width: 350px;
   padding: 0.6rem;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -45,6 +45,7 @@ button {
 }
 select {
   box-shadow: none;
+  max-width: 200px;
 }
 
 button {
