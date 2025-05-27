@@ -59,7 +59,7 @@ function TodoListRedux() {
                 onChange={(e) => handleMinutesChange(todo.id, e.target.value)}
                 style={{ width: '120px' }}
               />
-              <button onClick={() => handleLogTime(todo.id)}>⏳ Registrér</button>
+              <button onClick={() => handleLogTime(todo.id)}>✅</button>
             </div>
           ) : (
             !todo.isDone && (

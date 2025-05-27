@@ -51,17 +51,17 @@ function TodoListContext() {
                 onChange={(e) => handleMinutesChange(todo.id, e.target.value)}
                 style={{ width: '120px', padding: '0.4rem' }}
               />
-              <button onClick={() => handleLogTime(todo.id)}>⏳ Registrér</button>
+              <button onClick={() => handleLogTime(todo.id)}>✅</button>
             </div>
           )}
 
           {!todo.isDone && todo.type === 'hurtig' && (
             <div className="todo-actions">
-              <button onClick={() => toggleDone(todo.id)}>✅ Markér som færdig</button>
+              <button onClick={() => toggleDone(todo.id)}>✅</button>
             </div>
           )}
 
-          {todo.isDone && <p style={{ fontStyle: 'italic' }}>✅ Opgaven er færdig</p>}
+          {todo.isDone && <p style={{ fontStyle: 'italic' }}>✅</p>}
 
           <div className="todo-actions">
             <button onClick={() => deleteTodo(todo.id)}>❌</button>

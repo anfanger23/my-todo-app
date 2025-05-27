@@ -28,7 +28,6 @@ export const TodoProvider = ({ children }) => {
       estimatedMinutes: type === 'stor' ? Number(estimatedMinutes) : Number(estimatedMinutes) || 15,
       deadline: type === 'stor' ? deadline : null,
       tags,
-      plannedBlocks: [],
       isDone: false,
       createdAt: new Date().toISOString().split('T')[0],
     };
